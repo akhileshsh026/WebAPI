@@ -4,30 +4,52 @@ using System.Linq;
 using System.Web;
 using System.Web.Http.Dependencies;
 using Unity;
+using WebAPI_All_Sesions.Contracts;
+using WebAPI_All_Sesions.Models;
 
 namespace WebAPI_All_Sesions.UtilityClasses
 {
     public class APIDependancyResolve : IDependencyResolver
     {
-        UnityContainer 
+        UnityContainer unity;
+
+        public APIDependancyResolve()
+        {
+            unity = new UnityContainer();
+            unity.RegisterType<IEmployeeRepository, EmployeeRepository>();
+        }
         public IDependencyScope BeginScope()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
 
         public object GetService(Type serviceType)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return unity.Resolve(serviceType);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return unity.ResolveAll(serviceType);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
