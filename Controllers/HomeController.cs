@@ -18,10 +18,15 @@ namespace WebAPI_All_Sesions.Controllers
             new Employee {Id=4,Name="Akhilesh3",Location="Mandla3",salary=177864 },
         };
 
-              public List<Employee> GetAll()
+        public List<Employee> GetAll()
         {
             return empList;
 
+        }
+
+        public List<string> GetCount()
+        {
+            return new List<string> { "India" , "Chaina" , "bangladesh" , "Nepal" };
         }
     }
 }
