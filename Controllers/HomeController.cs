@@ -13,9 +13,9 @@ namespace WebAPI_All_Sesions.Controllers
     {
         IEmployeeRepository repo;
 
-        public HomeController()
+        public HomeController(IEmployeeRepository employeeRepository)
         {
-            repo = new EmployeeRepository();
+            repo = employeeRepository;
         }
 
         public List<Employee> GetAll()
