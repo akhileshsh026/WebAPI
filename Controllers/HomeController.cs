@@ -24,9 +24,24 @@ namespace WebAPI_All_Sesions.Controllers
 
         }
 
-        public List<string> GetCount()
+        public Employee GetById(int Id)
         {
-            return new List<string> { "India" , "Chaina" , "bangladesh" , "Nepal" };
+            return empList.FirstOrDefault(e => e.Id == Id);
+        }
+
+        public void Post(Employee emp)
+        {
+            empList.Add(emp);
+        }
+
+        public void Put()
+        {
+
+        }
+
+        public void Delete(int id)
+        {
+            empList.Remove(empList.FirstOrDefault(e => e.Id == id));
         }
     }
 }
