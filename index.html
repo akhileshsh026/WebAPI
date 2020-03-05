@@ -7,6 +7,30 @@
     <script>
         $(document).ready(function () {
             LoadEmployees();
+
+            $("#GetEmp").click(function () {
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/Home/' + $("#empId").val(),
+                    success: function (output) {
+                        alert(JSON.stringify(output));
+                    }
+                });
+            });    
+
+            $("#DelEmp").click(function () {
+                var Isconfirmation = confirm("Weather are you want to sure to Delete thsi Employee?");
+                if (Isconfirmation)
+                {
+                    $.ajax({
+                          type: 'DELETE',
+                          url: '/api/Home/' + $("#empId").val(),
+                          success: function () {
+                             LoadEmployees();
+                          }
+                   });
+                }
+            });
         })
 
         function LoadEmployees() {
@@ -22,6 +46,7 @@
                 }
             });
         }
+
     </script>
 </head>
 <body>
@@ -40,5 +65,12 @@
 
         </tbody>
     </table>
+    <br/>
+    <div>
+        <h1>Get Employee By Id ....</h1>
+        <label>Employee Id : <input type="text" id="empId"/></label>
+        <button id="GetEmp" onclick="GetEmployeeById()">Get Employee</button>
+        <button id="DelEmp">Delete Employee</button>
+    </div>
 </body>
 </html>
