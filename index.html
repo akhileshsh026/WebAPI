@@ -31,6 +31,28 @@
                    });
                 }
             });
+
+            $("h5").click(function () {
+                $("#newEmpDiv").show();
+            });
+
+            $("#btn_CreateEmployee").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Home',
+                    data: {
+                        Id: $("#Id").val(),
+                        Name: $("#empName").val(),
+                        Location: $("#empLocation").val(),
+                        Salary: $("#empSalary").val()
+                    },
+                    success: function () {
+                        alert("new Employee is created.");
+                        $("#newEmpDiv").hide();
+                        LoadEmployees();
+                    }
+                });
+            });
         })
 
         function LoadEmployees() {
@@ -62,15 +84,33 @@
             </tr>
         </thead>
         <tbody id="empData">
-
         </tbody>
     </table>
-    <br/>
+    <br />
     <div>
         <h1>Get Employee By Id ....</h1>
-        <label>Employee Id : <input type="text" id="empId"/></label>
+        <label>Employee Id : <input type="text" id="empId" /></label>
         <button id="GetEmp" onclick="GetEmployeeById()">Get Employee</button>
         <button id="DelEmp">Delete Employee</button>
+    </div>
+    <br />
+    <br />
+    <h5>Creating the New Employee</h5>
+    <div id="newEmpDiv" style="display:none">
+        <h4>Enter New Employee Details..</h4>
+        <p>
+            <label> Employee Id : <input type="text" id="Id" /></label>
+        </p>
+        <p>
+            <label> Employee Name : <input type="text" id="empName" /></label>
+        </p>
+        <p>
+            <label> Employee Location : <input type="text" id="empLocation" /></label>
+        </p>
+        <p>
+            <label> Employee Salary : <input type="text" id="empSalary" /></label>
+        </p>
+        <button id="btn_CreateEmployee">Create Employee..</button>
     </div>
 </body>
 </html>
