@@ -6,8 +6,22 @@
     <script src="lib/jquery/jquery.js"></script>
     <script>
         $(document).ready(function () {
-            
+            LoadEmployees();
         })
+
+        function LoadEmployees() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/Home/',
+                success: function (list) {
+                    $("#empData").empty();
+                    $.each(list, function (i, emp) {
+                        $("#empData").append('<tr><td>' + emp.Id + '</td><td>' + emp.Name + '</td><td>' +
+                            emp.Location + '</td><td>' + emp.salary);
+                    });
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -22,7 +36,7 @@
                 <th>Salary</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="empData">
 
         </tbody>
     </table>
